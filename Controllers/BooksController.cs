@@ -69,7 +69,7 @@ public class BooksController: Controller{
 
     //GET
     public IActionResult Delete(int? id){
-        if (id == null || id<=0){
+        if (id == null || id <= 0){
             return NotFound();
         }
         var bookFromDb = _context.Books.Find(id);
@@ -82,12 +82,12 @@ public class BooksController: Controller{
         }
     }
 
-    public IActionResult DeletePOST(int? id){
-        var book = _context.Books.Find(id);
+    [HttpPost, ActionName("Delete")]
+    public IActionResult Delete(Books obj){
+        var book = _context.Books.Find(obj.Id);
         if (book == null){
             return NotFound();
         }
-
         _context.Books.Remove(book);
         _context.SaveChanges();
         return RedirectToAction("Index");
