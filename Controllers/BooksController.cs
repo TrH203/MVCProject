@@ -32,6 +32,7 @@ public class BooksController: Controller{
         if(ModelState.IsValid){
             _context.Books.Add(obj);
             _context.SaveChanges();
+            TempData["Success"] = "Create Sucessfully";
             return RedirectToAction("Index");
         }
         return View();
@@ -62,6 +63,7 @@ public class BooksController: Controller{
         if(ModelState.IsValid){
             _context.Books.Update(obj);
             _context.SaveChanges();
+            TempData["Success"] = "Edit Sucessfully";
             return RedirectToAction("Index");
         }
         return View();
@@ -90,6 +92,7 @@ public class BooksController: Controller{
         }
         _context.Books.Remove(book);
         _context.SaveChanges();
+        TempData["Success"] = "Delete Sucessfully";
         return RedirectToAction("Index");
     }
 }
