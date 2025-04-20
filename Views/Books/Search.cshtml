@@ -1,0 +1,56 @@
+@model BooksSearchViewModel
+@{
+    ViewData["Title"] = "Search Books";
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Search Books</h2>
+        </div>
+    </div>
+
+    <div class="row pt-2"></div>
+        <div class="border p-3">
+            <form asp-controller="Books" asp-action="Search" method="post">
+                <label asp-for="@Model.Name">Name</label>
+                <div class="row pt-2 pb-2">
+                    <div class="col-10">
+                        <input asp-for="@Model.Name" class="form-control" />
+                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a asp-controller="Books" asp-action="Index" class="btn btn-secondary">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    @if (Model.Results != null && Model.Results.Any())
+    {
+        <div class="pt-4">
+            <h4>Result:</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Display Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model.Results)
+                    {
+                        <tr>
+                            <td>@book.Name</td>
+                            <td>@book.DisplayOrder</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else{
+        <p class="pt-3 text-muted">No Result Found</p>
+    } 
+    </div>
+</div>
